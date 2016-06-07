@@ -22,7 +22,7 @@ form {
 }
 
 #welcome {
-	color: #1e88e5;
+	color: red;
 }
 
 #likes {
@@ -36,3 +36,13 @@ form {
 .tag {
 	font-weight: bold;
 }
+
+#banner {
+	background-color: #A9A9A9;
+	margin-left: -2em;
+}
+
+
+
+
+

@@ -6,9 +6,11 @@ urlpatterns = [
     # url(r'^$', views.Landing.as_view(), name='landing'),
     url(r'^$', views.Index.as_view(), name='index'),
 
-    url(r'^register$', views.User_Register.as_view(), name='register'),
-    url(r'^login$', views.User_Login.as_view(), name='login'),
-    url(r'^logout$', views.User_Logout.as_view(), name='logout'),
+    url(r'^user_register$', views.User_Register.as_view(), name='user_register'),
+    url(r'^user_login$', views.User_Login.as_view(), name='user_login'),
+    url(r'^org_register$', views.Org_Register.as_view(), name='org_register'),
+    url(r'^org_login$', views.Org_Login.as_view(), name='org_login'),
+    url(r'^logout$', views.Logout.as_view(), name='logout'),
 
     # url(r'^add$', views.AddDate.as_view(), name='add'),
     # url(r'^price$', views.SearchDate_Price.as_view(), name='search_price'),
