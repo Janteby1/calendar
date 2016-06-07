@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone #make sure to set the timezone 
+from django.contrib.contenttypes import fields
+from django.contrib.contenttypes.models import ContentType
 
 # Create your models here.
 class Events(models.Model):
-	date = models.CharField (max_length=120)
+    date = models.CharField (max_length=120)
     place = models.CharField (max_length=120)
     address = models.CharField (max_length=150)
     description = models.CharField (max_length=280)
@@ -49,7 +51,8 @@ class UserProfile(models.Model):
 
 
 class Organization(models.Model):
-	name = models.CharField (max_length=120)
+    event = models.ForeignKey(Events) # FK to the events table
+    name = models.CharField (max_length=120)
     username = models.CharField (max_length=120)
     password = models.CharField (max_length=150)
     email = models.EmailField (max_length=280)
@@ -66,7 +69,7 @@ class Organization(models.Model):
 
 
 class Tags(models.Model):
-	name = models.CharField (max_length=120)
+    name = models.CharField (max_length=120)
 
     def to_json(self):
         return {
@@ -75,6 +78,12 @@ class Tags(models.Model):
         }
 
 
+class TaggedTag(models.Model):
+    # TaggedTag.object.get(tag)
+    tag = models.ForeignKey(Tags) # FK to the tag table
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    tagged_item = fields.GenericForeignKey('content_type', 'object_id') # FK to the user or event table
 
 
 
