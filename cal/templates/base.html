@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyCal</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src= "https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+	<script src="{% static 'js/django_ajax.js'%}"></script>
+	<script src="{% static 'js/main.js'%}"></script>
+
+</head>
+
+<body>
+    <div id="nav">
+    <nav class="blue lighten-1">
+    <!-- Mobile Structure -->
+    <ul class="side-nav" id="mobile-demo">
+        </li><a href="/index" class="center brand-logob"> MyCal</a></li>
+        <li><a href="#" id="add"> Add Events </a></li>
+        <li><a href="#" class="black-text" id="all"> All Events </a></li>
+        <li><a href="#" id="about"> About </a></li>
+
+            {% if user.username %}
+                <li><a id="username" href="#" data-activates='dropdown1'> {{ user.username }}</a></li>
+                <li><a id="logout" class="black-text text-lighten-1" href="#">Logout</a></li>
+            {% else %}
+                <li><a id="register" class="black-text text-lighten-1" href="#">Register</a></li>
+                <li><a id="login" class="black-text text-lighten-1" href="#">Login</a></li>
+            {% endif %}
+    </ul>
+
+    <div class="fixed-nav-wrapper">
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons black-text">menu</i></a>
+
+        <ul id="nav-mobile" class="left hide-on-med-and-down">  
+            </li><a href="/index" class="center brand-logo black-text"> MyCal</a></li>
+            <li><a href="#" class="black-text" id="add"> Add Events </a></li>
+            <li><a href="#" class="black-text" id="all"> All Events </a></li>
+            <li><a href="#" class="black-text" id="about"> About </a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if user.username %}
+                <li><a id="username" href="#" data-activates='dropdown1'> {{ user.username }}</a></li>
+                <li><a id="logout" class="black-text text-lighten-1" href="#">Logout</a></li>
+            {% else %}
+                <li><a id="register" class="black-text text-lighten-1" href="#">Register</a></li>
+                <li><a id="login" class="black-text text-lighten-1" href="#">Login</a></li>
+            {% endif %}
+        </ul>   
+        </div>
+    </nav>
+</div>
+
+    <div class= "button_div" id="answer_div">
+
+        {% block content %}
+        <!-- all content from other HTML pages go here -->
+        {% endblock content %}
+
+    </div>
+
+    {% block footer %}
+        <!-- all footer HTML goes here -->
+    {% endblock footer %}
+
+    {% block templates %}
+        <!-- all content from other HTML pages go here -->
+    {% endblock templates %}
+
+</body>
+</html>
