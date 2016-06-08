@@ -22,7 +22,7 @@ $(document).ready(function(){
 
     $.ajax({
         method: "POST",
-        url: "register",
+        url: "user_register",
         data: query_string,
     }).done(function(data, status){
 
@@ -51,7 +51,7 @@ $(document).ready(function(){
 
     $.ajax({
         method: "POST",
-        url: "register",
+        url: "org_register",
         data: query_string,
     }).done(function(data, status){
 
@@ -81,7 +81,7 @@ $(document).ready(function(){
 
     $.ajax({
         method: "POST",
-        url: "login",
+        url: "user_login",
         data: query_string,
     }).done(function(data, status){
 
@@ -110,7 +110,7 @@ $(document).ready(function(){
 
     $.ajax({
         method: "POST",
-        url: "login",
+        url: "org_login",
         data: query_string,
     }).done(function(data, status){
 
@@ -124,7 +124,7 @@ $(document).ready(function(){
     });
 
 
-    ///// Logout /////
+///// Logout /////
     $('#nav').on('click', "#logout", function(event){
     event.preventDefault();
 
@@ -137,6 +137,19 @@ $(document).ready(function(){
 	location.reload();
     });
 });
+
+///// About /////
+    $('#nav').on('click', "#about", function(event){
+        event.preventDefault();
+        var template = $('#about-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);
+    });
+
+
+
+
+
 
 
 });
