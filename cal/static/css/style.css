@@ -38,11 +38,17 @@ form {
 }
 
 #banner {
-	background-color: #A9A9A9;
+	background-color: white;
 	margin-left: -2em;
 }
 
 
+footer.page-footer {
+	margin-top: 0em;
+}
 
+.banner_row {
+	margin-bottom: 0em;
+}
 
 

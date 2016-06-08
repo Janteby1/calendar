@@ -69,34 +69,40 @@ class User_Login(View):
         else:
             return JsonResponse({'errors': form.errors})
 
-# class Org_Register(View):
-#     def post(self, request):
-#         if request.is_ajax():
-#             data = request.POST
-#         else:
-#             body = request.body.decode()
-#             if not body: 
-#                 return JsonResponse ({"response":"Missing Body"})
-#             data = json.loads(body)
+class Org_Register(View):
+    def post(self, request):
+        if request.is_ajax():
+            data = request.POST
+        else:
+            body = request.body.decode()
+            if not body: 
+                return JsonResponse ({"response":"Missing Body"})
+            data = json.loads(body)
 
-#         user_form = UserForm(data)
-#         if user_form.is_valid():
-#             user = user_form.save()
-#             return JsonResponse({"Message": "Register succesfull", "success": True})
-#         else:
-#             return JsonResponse ({"response":"Invalid information", 'success' : False, 'errors': user_form.errors })
+        org_form = OrgForm(data)
+        if org_form.is_valid():
+            org = org_form.save()
+            return JsonResponse({"Message": "Register succesfull", "success": True})
+        else:
+            return JsonResponse ({"response":"Invalid information", 'success' : False, 'errors': org_form.errors })
 
 
-# class Org_Login(View):
-#     def post(self, request):
-#         form = AuthenticationForm(request, data=request.POST)
-#         if form.is_valid():
-#             user = form.get_user()
-#             login(request, user)
-#             request.session.set_expiry(30000)
-#             return JsonResponse({"username":user.username, "success": True})
-#         else:
-#             return JsonResponse({'errors': form.errors})
+class Org_Login(View):
+    def post(self, request):
+        form = OrgLoginForm(request, data=request.POST)
+        print("not valid")
+        
+        if form.is_valid():
+            print("valid")
+            Organization = form.get_user()
+            print (Organization)
+
+            login(request, Organization)
+            request.session.set_expiry(30000)
+            return JsonResponse({"username":Organization.username, "success": True})
+        else:
+            return JsonResponse({'errors': form.errors})
+
 
 class Logout(View):
     def post(self, request):

@@ -4,36 +4,6 @@ from django.utils import timezone #make sure to set the timezone
 from django.contrib.contenttypes import fields
 from django.contrib.contenttypes.models import ContentType
 
-# Create your models here.
-class Events(models.Model):
-    date = models.CharField (max_length=120)
-    place = models.CharField (max_length=120)
-    address = models.CharField (max_length=150)
-    description = models.CharField (max_length=280)
-
-    phone = models.CharField (max_length=20, null = True, default = None,)
-    website = models.URLField(max_length=120, null = True, default = None,) 
-    price = models.CharField (max_length=5, null = True, default = None,)
-
-    created_at = models.DateTimeField(default = timezone.now, editable=False)
-    show = models.BooleanField(default=True)
-    vote = models.IntegerField(default = 0)
-
-    def to_json(self):
-        return {
-            "id": self.id,
-            "place": self.place,
-            "date": self.date,
-            "address": self.address,
-            "description": self.description,
-            "phone": self.phone,
-            "website": self.website,
-            "price": self.price,
-            "created_at": self.created_at,
-            "vote": self.vote,
-            "show": self.show,
-        }
-
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
@@ -51,7 +21,6 @@ class UserProfile(models.Model):
 
 
 class Organization(models.Model):
-    event = models.ForeignKey(Events) # FK to the events table
     name = models.CharField (max_length=120)
     username = models.CharField (max_length=120)
     password = models.CharField (max_length=150)
@@ -85,6 +54,38 @@ class TaggedTag(models.Model):
     object_id = models.PositiveIntegerField()
     tagged_item = fields.GenericForeignKey('content_type', 'object_id') # FK to the user or event table
 
+
+# Create your models here.
+class Events(models.Model):
+    date = models.CharField (max_length=120)
+    place = models.CharField (max_length=120)
+    address = models.CharField (max_length=150)
+    description = models.CharField (max_length=280)
+
+    phone = models.CharField (max_length=20, null = True, default = None,)
+    website = models.URLField(max_length=120, null = True, default = None,) 
+    price = models.CharField (max_length=5, null = True, default = None,)
+
+    created_at = models.DateTimeField(default = timezone.now, editable=False)
+    show = models.BooleanField(default=True)
+    vote = models.IntegerField(default = 0)
+    organization = models.ForeignKey(Organization) # FK to the Organization table
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "place": self.place,
+            "date": self.date,
+            "address": self.address,
+            "description": self.description,
+            "phone": self.phone,
+            "website": self.website,
+            "price": self.price,
+            "created_at": self.created_at,
+            "vote": self.vote,
+            "show": self.show,
+            "organization": self.organization,
+        }
 
 
 
