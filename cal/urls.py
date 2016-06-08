@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^org_login$', views.Org_Login.as_view(), name='org_login'),
     url(r'^logout$', views.Logout.as_view(), name='logout'),
 
-    # url(r'^add$', views.AddDate.as_view(), name='add'),
+    url(r'^add$', views.AddDate.as_view(), name='add'),
     # url(r'^price$', views.SearchDate_Price.as_view(), name='search_price'),
     # url(r'^category$', views.SearchDate_Category.as_view(), name='search_category'),
     # url(r'^area$', views.SearchDate_Area.as_view(), name='search_area'),

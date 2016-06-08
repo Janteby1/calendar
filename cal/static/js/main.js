@@ -152,4 +152,51 @@ $(document).ready(function(){
 
 
 
+
+
+
+
+
+///// Create /////
+    $('#nav').on('click', "#add", function(event){
+        event.preventDefault();
+
+        var template = $('#create-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+    });
+
+
+    $('#answer_div').on('submit', '#create_form',function(event){
+    event.preventDefault();
+
+    var query_string = $(this).serialize() //returns all the data in your form
+    console.log(query_string)
+
+    $.ajax({
+        method: "POST",
+        url: "add",
+        data: query_string,
+    }).done(function(data, status){
+
+    if (data.success){
+        console.log(data.Message)
+        var template = $('#thanx-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+
+        });
+    });
+
+
+
 });

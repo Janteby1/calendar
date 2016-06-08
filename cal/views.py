@@ -112,3 +112,41 @@ class Logout(View):
 
 
 
+
+
+
+
+
+
+
+
+
+class AddDate(View):
+    def post(self, request):
+        # checks to make sure the user is logged in 
+        if request.user.is_authenticated():
+            form = AddDateForm(request.POST)
+            form.is_valid()
+            # add the user to each post 
+            user = request.user
+            date = form.save(commit=False)
+            date.user = user
+            date.save()
+            return JsonResponse({"Message":"added date", "success": True})
+        else:
+            return JsonResponse({"success": False})
+
+        if request.is_ajax():
+            data = request.POST
+        else:
+            body = request.body.decode()
+            if not body: 
+                return JsonResponse ({"response":"Missing Body"})
+            data = json.loads(body)
+
+        user_form = UserForm(data)
+        if user_form.is_valid():
+            user = user_form.save()
+            return JsonResponse({"Message": "Register succesfull", "success": True})
+
+
