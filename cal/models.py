@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User)
+    organization = models.BooleanField(default = False) # FK to the Organization table
     '''
     Included in the django user model are these attributes:
     Username, Password, Email address, firstname, surname
@@ -21,9 +22,8 @@ class UserProfile(models.Model):
 
 
 class Organization(models.Model):
+    admin = models.ForeignKey(User) # FK to the User table
     name = models.CharField (max_length=120)
-    username = models.CharField (max_length=120)
-    password = models.CharField (max_length=150)
     email = models.EmailField (max_length=280)
     phone = models.CharField (max_length=120)
     website = models.URLField (max_length=150)
@@ -69,7 +69,7 @@ class Events(models.Model):
     created_at = models.DateTimeField(default = timezone.now, editable=False)
     show = models.BooleanField(default=True)
     vote = models.IntegerField(default = 0)
-    organization = models.ForeignKey(Organization) # FK to the Organization table
+    creator = models.ForeignKey(User) # FK to the User table
 
     def to_json(self):
         return {
@@ -84,7 +84,7 @@ class Events(models.Model):
             "created_at": self.created_at,
             "vote": self.vote,
             "show": self.show,
-            "organization": self.organization,
+            "creator": self.creator,
         }
 
 
