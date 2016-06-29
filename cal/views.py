@@ -201,6 +201,13 @@ class Vote_Down_Date(View):
         else:
             return JsonResponse({"success": False})
 
+class AddTags(View):
+    def get(self, request):
+        pass
+
+
+
+
 
 
 

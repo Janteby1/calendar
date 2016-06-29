@@ -1,2 +1,4 @@
 Predetermined tags?
-Create event - add organization name and tags
+Create event - add tags
+
+my events has all events that match your tags, also a botton to manage your tags
