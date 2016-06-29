@@ -51,4 +51,38 @@ footer.page-footer {
 	margin-bottom: 0em;
 }
 
+.space {
+	margin: .5em;
+	background-color: transparent;
+}
+
+.space:hover {
+	background-color: transparent;
+	font-size: 2em;
+}
+
+.inline {
+	display: inline;
+}
+
+.adjustable {
+	margin-top: 4em;
+}
+
+#bigger {
+	font-weight: bold;
+}
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+	.adjustable {
+	margin-top: .5em;
+}
+
+}
+
+
 

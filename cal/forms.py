@@ -17,8 +17,6 @@ class OrgForm(forms.ModelForm):
         model = Organization
         fields = [
             "name",
-            "username",
-            "password",
             "email",
             "phone", 
             "website",
@@ -43,17 +41,40 @@ class UserLoginForm(forms.ModelForm):
         }
 
 
-class OrgLoginForm(forms.ModelForm):
-    class Meta:
-        model = Organization
-        fields = [
-            "username",
-            "password",
-        ]
-        widgets = {
-            # this sets the input text area
-            "password": PasswordInput(),
-        }
+# class OrgLoginForm(forms.ModelForm):
+#     class Meta:
+#         model = Organization
+#         fields = [
+#             "username",
+#             "password",
+#         ]
+#         widgets = {
+#             # this sets the input text area
+#             "password": PasswordInput(),
+#         }
+
+
+class AddEventForm(forms.Form):
+    date = forms.CharField() # get the input directly from the user
+    place = forms.CharField() # get the input directly from the user
+    address = forms.CharField() # get the input directly from the user
+
+    price = forms.CharField() # get the input directly from the user
+    description = forms.CharField() # get the input directly from the user
+    phone = forms.CharField() # get the input directly from the user
+    website = forms.CharField() # get the input directly from the user
+
+    def save(self, commit=True):
+        event = Events(**self.cleaned_data)
+        if commit == True:
+            event.save()
+        return event
+
+'''    
+    organization = models.ForeignKey(Organization) # FK to the Organization table
+    Tags
+'''
+
 
 
 

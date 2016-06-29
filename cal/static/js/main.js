@@ -8,7 +8,7 @@ $(document).ready(function(){
     });
 
 ///// User Register /////
-    $('#nav').on('click', "#user_register", function(event){
+    $('#nav').on('click', "#register", function(event){
     	event.preventDefault();
         var template = $('#user_register-template').html();
         var renderM = Mustache.render(template);
@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 
 ///// Org Register /////
-    $('#nav').on('click', "#org_register", function(event){
+    $('#nav').on('click', "#add_org", function(event){
         event.preventDefault();
         var template = $('#org_register-template').html();
         var renderM = Mustache.render(template);
@@ -57,7 +57,7 @@ $(document).ready(function(){
 
         if (data.success){
             ////// if they registered then display the Login ////////
-                var template = $('#org_login-template').html();
+                var template = $('#org_added-template').html();
                 var renderM = Mustache.render(template);
                 $('#answer_div').html(renderM);
             }
@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 
 ///// User Login /////
-    $('#nav').on('click', "#user_login", function(event){
+    $('#nav').on('click', "#login", function(event){
     	event.preventDefault();
         var template = $('#user_login-template').html();
         var renderM = Mustache.render(template);
@@ -96,32 +96,32 @@ $(document).ready(function(){
 
 
 ///// Org Login /////
-    $('#nav').on('click', "#org_login", function(event){
-        event.preventDefault();
-        var template = $('#org_login-template').html();
-        var renderM = Mustache.render(template);
-        $('#answer_div').html(renderM);
-    });
+    // $('#nav').on('click', "#org_login", function(event){
+    //     event.preventDefault();
+    //     var template = $('#org_login-template').html();
+    //     var renderM = Mustache.render(template);
+    //     $('#answer_div').html(renderM);
+    // });
 
-    $('#answer_div').on('submit', '#org_login_form',function(event){
-    event.preventDefault();
+    // $('#answer_div').on('submit', '#org_login_form',function(event){
+    // event.preventDefault();
 
-    var query_string = $(this).serialize() // returns all the data in your form
+    // var query_string = $(this).serialize() // returns all the data in your form
 
-    $.ajax({
-        method: "POST",
-        url: "org_login",
-        data: query_string,
-    }).done(function(data, status){
+    // $.ajax({
+    //     method: "POST",
+    //     url: "org_login",
+    //     data: query_string,
+    // }).done(function(data, status){
 
-          if (data.success){
-          ////// if they login correctly ////////
-            console.log("HERE")
-            document.location.href="/";
-            window.scrollTo(0, 0);
-            } 
-        });
-    });
+    //       if (data.success){
+    //       ////// if they login correctly ////////
+    //         console.log("HERE")
+    //         document.location.href="/";
+    //         window.scrollTo(0, 0);
+    //         } 
+    //     });
+    // });
 
 
 ///// Logout /////
@@ -138,6 +138,7 @@ $(document).ready(function(){
     });
 });
 
+
 ///// About /////
     $('#nav').on('click', "#about", function(event){
         event.preventDefault();
@@ -147,6 +148,70 @@ $(document).ready(function(){
     });
 
 
+///// Create /////
+    $('#nav').on('click', "#add", function(event){
+        event.preventDefault();
+
+        var template = $('#create-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+    });
+
+
+    $('#answer_div').on('submit', '#create_form',function(event){
+    event.preventDefault();
+
+    var query_string = $(this).serialize() //returns all the data in your form
+    console.log(query_string)
+
+    $.ajax({
+        method: "POST",
+        url: "add",
+        data: query_string,
+    }).done(function(data, status){
+
+    if (data.success){
+        console.log(data.Message)
+        var template = $('#thanx-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+            }
+        });
+    });
+
+
+///// View All /////
+    $('#nav').on('click', "#all", function(event){
+    event.preventDefault();
+
+    $.ajax({
+        method: "GET",
+        url: "all",
+        // data: query_string,
+    }).done(function(data, status){
+
+    if (data.success){
+        var template = $('#results-template').html();
+        var renderM = Mustache.render(template, {"results":data.results});
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+            }
+        });
+    });
 
 
 
