@@ -57,7 +57,7 @@ $(document).ready(function(){
 
         if (data.success){
             ////// if they registered then display the Login ////////
-                var template = $('#org_login-template').html();
+                var template = $('#org_added-template').html();
                 var renderM = Mustache.render(template);
                 $('#answer_div').html(renderM);
             }
@@ -138,6 +138,7 @@ $(document).ready(function(){
     });
 });
 
+
 ///// About /////
     $('#nav').on('click', "#about", function(event){
         event.preventDefault();
@@ -145,16 +146,6 @@ $(document).ready(function(){
         var renderM = Mustache.render(template);
         $('#answer_div').html(renderM);
     });
-
-
-
-
-
-
-
-
-
-
 
 
 ///// Create /////
@@ -182,20 +173,47 @@ $(document).ready(function(){
 
     if (data.success){
         console.log(data.Message)
-        // var template = $('#thanx-template').html();
-        // var renderM = Mustache.render(template);
-        // $('#answer_div').html(renderM);  
+        var template = $('#thanx-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
         window.scrollTo(0, 0);
         }
-    // else {
-    //     var template = $('#403-template').html();
-    //     var renderM = Mustache.render(template);
-    //     $('#answer_div').html(renderM);  
-    //     window.scrollTo(0, 0);
-    //     }
-
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+            }
         });
     });
+
+
+///// View All /////
+    $('#nav').on('click', "#all", function(event){
+    event.preventDefault();
+
+    $.ajax({
+        method: "GET",
+        url: "all",
+        // data: query_string,
+    }).done(function(data, status){
+
+    if (data.success){
+        var template = $('#results-template').html();
+        var renderM = Mustache.render(template, {"results":data.results});
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+            }
+        });
+    });
+
+
 
 
 

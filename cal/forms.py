@@ -54,19 +54,6 @@ class UserLoginForm(forms.ModelForm):
 #         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 class AddEventForm(forms.Form):
     date = forms.CharField() # get the input directly from the user
     place = forms.CharField() # get the input directly from the user
@@ -77,16 +64,16 @@ class AddEventForm(forms.Form):
     phone = forms.CharField() # get the input directly from the user
     website = forms.CharField() # get the input directly from the user
 
+    def save(self, commit=True):
+        event = Events(**self.cleaned_data)
+        if commit == True:
+            event.save()
+        return event
+
 '''    
     organization = models.ForeignKey(Organization) # FK to the Organization table
     Tags
 '''
-
-    # def save(self, commit=True):
-    #     date = Dates(**self.cleaned_data)
-    #     if commit == True:
-    #         date.save()
-    #     return date
 
 
 

@@ -9,13 +9,11 @@ urlpatterns = [
     url(r'^user_register$', views.User_Register.as_view(), name='user_register'),
     url(r'^user_login$', views.User_Login.as_view(), name='user_login'),
     url(r'^org_register$', views.Org_Register.as_view(), name='org_register'),
-
     # url(r'^org_login$', views.Org_Login.as_view(), name='org_login'),
     url(r'^logout$', views.Logout.as_view(), name='logout'),
 
-    # url(r'^add$', views.AddEvent.as_view(), name='add'),
-
-    # url(r'^price$', views.SearchDate_Price.as_view(), name='search_price'),
+    url(r'^add$', views.AddEvent.as_view(), name='add'),
+    url(r'^all$', views.ViewAll.as_view(), name='all'),
     # url(r'^category$', views.SearchDate_Category.as_view(), name='search_category'),
     # url(r'^area$', views.SearchDate_Area.as_view(), name='search_area'),
 

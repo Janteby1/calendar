@@ -84,7 +84,7 @@ class Events(models.Model):
             "created_at": self.created_at,
             "vote": self.vote,
             "show": self.show,
-            "creator": self.creator,
+            "creator": self.creator.id,
         }
 
 
