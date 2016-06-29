@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^delete/(?P<events_id>[A-Za-z0-9\-\_]+)$', views.Delete_Date.as_view(), name='delete'),
     url(r'^vote_up/(?P<events_id>[A-Za-z0-9\-\_]+)$', views.Vote_Up_Date.as_view(), name='vote_up'),
     url(r'^vote_down/(?P<events_id>[A-Za-z0-9\-\_]+)$', views.Vote_Down_Date.as_view(), name='vote_down'),
-    # url(r'^top$', views.Top_Dates.as_view(), name='top'),
+    url(r'^tags$', views.AddTags.as_view(), name='tags'),
 ]

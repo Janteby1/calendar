@@ -173,6 +173,35 @@ $(document).ready(function(){
 
     if (data.success){
         console.log(data.Message)
+        var template = $('#tags-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+            }
+        });
+    });
+
+    // add tags //
+    $('#answer_div').on('submit', '#tags_form',function(event){
+    event.preventDefault();
+
+    var query_string = $(this).serialize() //returns all the data in your form
+    console.log(query_string)
+
+    $.ajax({
+        method: "POST",
+        url: "tags",
+        data: query_string,
+    }).done(function(data, status){
+
+    if (data.success){
+        console.log(data.Message)
         var template = $('#thanx-template').html();
         var renderM = Mustache.render(template);
         $('#answer_div').html(renderM);  
@@ -313,6 +342,14 @@ $(document).ready(function(){
     });
 
 
+// Create Button //
+    $('#answer_div').on('click', "#create_button", function(event){
+      event.preventDefault();
+        var template = $('#create-template').html();
+        var renderM = Mustache.render(template, {});
+        $('#answer_div').html(renderM);
+        window.scrollTo(0, 0);
+    });
 
 
 

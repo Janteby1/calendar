@@ -39,7 +39,7 @@ class UserLoginForm(forms.ModelForm):
             # this sets the input text area
             "password": PasswordInput(),
         }
-        
+
 
 class AddEventForm(forms.ModelForm):
     date = forms.CharField() # get the input directly from the user
@@ -58,6 +58,13 @@ class AddEventForm(forms.ModelForm):
             'price','description','phone','website'
         ]
 
+
+class AddTagsForm(forms.ModelForm):
+    tags = forms.CharField() # get the input directly from the user
+
+    class Meta:
+        model = Tags
+        fields = ['name']
 
 
 
