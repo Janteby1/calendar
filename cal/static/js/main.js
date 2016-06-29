@@ -214,6 +214,105 @@ $(document).ready(function(){
     });
 
 
+//// Delete Button ////
+    $('#answer_div').on('submit', ".delete_button_form", function(event){
+    event.preventDefault();
+
+    var check = confirm("Are you sure you want to delete this event?");
+
+    if (check == true) {
+        var delete_id = ($(this).find("[name='delete_id']").attr("value")); // find tells it where in the this object to look for the value
+
+        $.ajax({
+            method: "POST",
+            url: ("delete/" + delete_id),
+            // data: query_string,
+        }).done(function(data, status){
+
+            if (data.success){
+                ////// if answers came back ////////
+                alert("Ok, Event Deleted \nRefresh page to see updated results");
+                window.scrollTo(0, 0);
+            } else {
+                var template = $('#403-template').html();
+                var renderM = Mustache.render(template);
+                $('#answer_div').html(renderM);  
+                window.scrollTo(0, 0);
+            }
+            });
+
+    } else {
+        alert("Ok, Event will be kept");
+    }
+});
+
+
+//// Vote Up / Like Button ////
+    $('#answer_div').on('submit', ".vote_up_button_form", function(event){
+    event.preventDefault();
+
+    var check = confirm("Would you like to UP vote this event?");
+
+    if (check == true) {
+        var vote_id = ($(this).find("[name='vote_id']").attr("value")); // find tells it where in the this object to look for the value
+
+        $.ajax({
+            method: "POST",
+            url: ("vote_up/" + vote_id),
+            // data: query_string,
+        }).done(function(data, status){
+
+            if (data.success){
+                ////// if answers came back ////////
+                alert("Event UP voted! \nThank you! ");
+                window.scrollTo(0, 0);
+            } else {
+                var template = $('#403-template').html();
+                var renderM = Mustache.render(template);
+                $('#answer_div').html(renderM);  
+                window.scrollTo(0, 0);
+            }
+            });
+
+    } else {
+        alert("Ok, Event idea will be kept");
+    }
+    });
+
+
+//// Vote Down Button ////
+    $('#answer_div').on('submit', ".vote_down_button_form", function(event){
+    event.preventDefault();
+
+    var check = confirm("Would you like to DOWN vote this event?");
+
+    if (check == true) {
+        var vote_id = ($(this).find("[name='vote_id']").attr("value")); // find tells it where in the this object to look for the value
+
+        $.ajax({
+            method: "POST",
+            url: ("vote_down/" + vote_id),
+            // data: query_string,
+        }).done(function(data, status){
+
+            if (data.success){
+                ////// if answers came back ////////
+                alert("Event DOWN voted! \nThank you! ");
+                window.scrollTo(0, 0);
+            } else {
+                var template = $('#403-template').html();
+                var renderM = Mustache.render(template);
+                $('#answer_div').html(renderM);  
+                window.scrollTo(0, 0);
+            }
+            });
+
+    } else {
+        alert("Ok, Event idea will be kept");
+    }
+    });
+
+
 
 
 
