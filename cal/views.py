@@ -159,13 +159,47 @@ class AddEvent(View):
 class ViewAll(View):
     def get(self, request):
         # this line gets the top 25 events that we have in the db and orders them by top votes
-        events = Events.objects.filter(show=True).order_by('-vote')[:25]
+        events = Events.objects.filter(show=True).order_by('-created_at')[:25]
         # put all the values into a json dictionary with a method called from the models
         events = [event.to_json() for event in events]
-
         print (events)
         return JsonResponse({"success": True, 'results': events})
 
+
+class Delete_Date(View):
+    def post(self, request, events_id=None):
+        event = Events.objects.get(id=events_id)
+
+        if request.user.is_authenticated():
+            event.show = False
+            event.save()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False})
+
+
+class Vote_Up_Date(View):
+    def post(self, request, events_id=None):
+        event = Events.objects.get(id=events_id)
+
+        if request.user.is_authenticated():
+            event.vote += 1
+            event.save()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False})
+
+
+class Vote_Down_Date(View):
+    def post(self, request, events_id=None):
+        event = Events.objects.get(id=events_id)
+
+        if request.user.is_authenticated():
+            event.vote -= 1
+            event.save()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False})
 
 
 
