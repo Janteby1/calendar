@@ -355,5 +355,80 @@ $(document).ready(function(){
     });
 
 
+///// Manage My Tags /////
+    $('#answer_div').on('click', "#my_tags", function(event){
+        event.preventDefault();
+
+        var template = $('#my-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+    });
+
+    $('#answer_div').on('submit', '#my_tags_form',function(event){
+    event.preventDefault();
+
+    var query_string = $(this).serialize() //returns all the data in your form
+    console.log(query_string)
+
+    $.ajax({
+        method: "POST",
+        url: "my_tags",
+        data: query_string,
+    }).done(function(data, status){
+
+    if (data.success){
+        console.log(data.Message)
+        var template = $('#tags-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+///// View My Events /////
+// right now this just gives you all Events
+
+    $('#nav').on('click', "#my", function(event){
+        event.preventDefault();
+
+    var query_string = $(this).serialize() //returns all the data in your form
+    console.log(query_string)
+
+    $.ajax({
+        method: "GET",
+        url: "my",
+        data: query_string,
+    }).done(function(data, status){
+
+    if (data.success){
+        var template = $('#my-results-template').html();
+        var renderM = Mustache.render(template, {"results":data.results});
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+        }
+    else {
+        var template = $('#403-template').html();
+        var renderM = Mustache.render(template);
+        $('#answer_div').html(renderM);  
+        window.scrollTo(0, 0);
+            }
+        });
+    });
 
 });

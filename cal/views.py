@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 
-from .forms import UserForm, UserLoginForm, AddEventForm, OrgForm #OrgLoginForm, 
+from .forms import UserForm, UserLoginForm, AddEventForm, OrgForm 
 from .models import UserProfile, Events, Organization, Tags, TaggedTag
 
 
@@ -162,7 +162,7 @@ class ViewAll(View):
         events = Events.objects.filter(show=True).order_by('-created_at')[:25]
         # put all the values into a json dictionary with a method called from the models
         events = [event.to_json() for event in events]
-        print (events)
+        # print (events)
         return JsonResponse({"success": True, 'results': events})
 
 
@@ -207,17 +207,48 @@ class AddTags(View):
         # get the tags 
         tag_names = request.POST.getlist('tag')
         tags = Tags.objects.filter(name__in=tag_names)
-        print (tags)
 
         # get the event 
         event = Events.objects.get(id=event_id)
-        print (event)
 
-        # add a taggedtag object for each tag 
-        # multiple entries each with an even adn a tag 
+        for tag in tags: 
+            TaggedTag.objects.create(
+                tag = tag,
+                tagged_item = event
+            )
+
         return JsonResponse({"success": True, "Message":"added tags", 'data': dict(request.POST)})
 
 
+class My_Events(View):
+    # right now just gets everything - need to filter by users tags!!
+
+        # TaggedTag.objects.filter(tag__name='men')
+
+    def get(self, request):
+        # this line gets the top 25 events that we have in the db and orders them by top votes
+        events = Events.objects.filter(show=True).order_by('-created_at')[:25]
+        # put all the values into a json dictionary with a method called from the models
+        events = [event.to_json() for event in events]
+        # print (events)
+        return JsonResponse({"success": True, 'results': events})
+
+
+class My_Tags(View):
+    def post(self, request, event_id=None):
+        # get the tags 
+        tag_names = request.POST.getlist('tag')
+        tags = Tags.objects.filter(name__in=tag_names)
+
+        # get the user 
+        user = request.user
+
+        for tag in tags: 
+            TaggedTag.objects.create(
+                tag = tag,
+                tagged_item = user
+            )
+        return JsonResponse({"success": True, "Message":"added tags", 'data': dict(request.POST)})
 
 
 
