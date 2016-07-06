@@ -59,12 +59,12 @@ class AddEventForm(forms.ModelForm):
         ]
 
 
-class AddTagsForm(forms.ModelForm):
-    tags = forms.CharField() # get the input directly from the user
+# class AddTagsForm(forms.ModelForm):
+#     tags = forms.CharField() # get the input directly from the user
 
-    class Meta:
-        model = Tags
-        fields = ['name']
+#     class Meta:
+#         model = Tags
+#         fields = ['name']
 
 
 
