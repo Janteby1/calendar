@@ -173,6 +173,8 @@ $(document).ready(function(){
 
     if (data.success){
         console.log(data.Message)
+        event_id = data.id
+        // console.log(data.id)
         var template = $('#tags-template').html();
         var renderM = Mustache.render(template);
         $('#answer_div').html(renderM);  
@@ -193,10 +195,11 @@ $(document).ready(function(){
 
     var query_string = $(this).serialize() //returns all the data in your form
     console.log(query_string)
+    console.log(event_id)
 
     $.ajax({
         method: "POST",
-        url: "tags",
+        url: ("tags/" + event_id),
         data: query_string,
     }).done(function(data, status){
 

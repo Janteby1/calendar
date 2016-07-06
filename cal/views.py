@@ -151,7 +151,7 @@ class AddEvent(View):
             event = form.save(commit=False)
             event.creator = user
             event.save()
-            return JsonResponse({"Message":"added date", "success": True})
+            return JsonResponse({"Message":"added event", "success": True, "id": event.id})
         else:
             return JsonResponse({"success": False})
 
@@ -166,7 +166,7 @@ class ViewAll(View):
         return JsonResponse({"success": True, 'results': events})
 
 
-class Delete_Date(View):
+class Delete_Event(View):
     def post(self, request, events_id=None):
         event = Events.objects.get(id=events_id)
 
@@ -178,7 +178,7 @@ class Delete_Date(View):
             return JsonResponse({"success": False})
 
 
-class Vote_Up_Date(View):
+class Vote_Up_Event(View):
     def post(self, request, events_id=None):
         event = Events.objects.get(id=events_id)
 
@@ -190,7 +190,7 @@ class Vote_Up_Date(View):
             return JsonResponse({"success": False})
 
 
-class Vote_Down_Date(View):
+class Vote_Down_Event(View):
     def post(self, request, events_id=None):
         event = Events.objects.get(id=events_id)
 
@@ -201,9 +201,23 @@ class Vote_Down_Date(View):
         else:
             return JsonResponse({"success": False})
 
+
 class AddTags(View):
-    def get(self, request):
-        pass
+    def post(self, request, event_id=None):
+        # get the tags 
+        tag_names = request.POST.getlist('tag')
+        tags = Tags.objects.filter(name__in=tag_names)
+        print (tags)
+
+        # get the event 
+        event = Events.objects.get(id=event_id)
+        print (event)
+
+        # add a taggedtag object for each tag 
+        # multiple entries each with an even adn a tag 
+        return JsonResponse({"success": True, "Message":"added tags", 'data': dict(request.POST)})
+
+
 
 
 
