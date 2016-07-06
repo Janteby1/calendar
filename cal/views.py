@@ -222,8 +222,7 @@ class AddTags(View):
 
 class My_Events(View):
     # right now just gets everything - need to filter by users tags!!
-
-        # TaggedTag.objects.filter(tag__name='men')
+    # TaggedTag.objects.filter(tag__name='men')
 
     def get(self, request):
         # this line gets the top 25 events that we have in the db and orders them by top votes

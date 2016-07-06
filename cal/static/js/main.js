@@ -379,7 +379,7 @@ $(document).ready(function(){
 
     if (data.success){
         console.log(data.Message)
-        var template = $('#tags-template').html();
+        var template = $('#thanx-template').html();
         var renderM = Mustache.render(template);
         $('#answer_div').html(renderM);  
         window.scrollTo(0, 0);
@@ -408,7 +408,7 @@ $(document).ready(function(){
         event.preventDefault();
 
     var query_string = $(this).serialize() //returns all the data in your form
-    console.log(query_string)
+    // console.log(query_string)
 
     $.ajax({
         method: "GET",
