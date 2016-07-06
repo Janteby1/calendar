@@ -23,4 +23,7 @@ urlpatterns = [
     url(r'^vote_up/(?P<events_id>[A-Za-z0-9\-\_]+)$', views.Vote_Up_Event.as_view(), name='vote_up'),
     url(r'^vote_down/(?P<events_id>[A-Za-z0-9\-\_]+)$', views.Vote_Down_Event.as_view(), name='vote_down'),
     url(r'^tags/(?P<event_id>[A-Za-z0-9\-\_]+)$', views.AddTags.as_view(), name='tags'),
+
+    url(r'^my$', views.My_Events.as_view(), name='my'),
+    url(r'^my_tags$', views.My_Tags.as_view(), name='my_tags'),
 ]

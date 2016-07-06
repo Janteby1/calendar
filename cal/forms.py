@@ -63,9 +63,8 @@ class AddEventForm(forms.ModelForm):
 #     tags = forms.CharField() # get the input directly from the user
 
 #     class Meta:
-#         model = Tags
-#         fields = ['name']
-
+#         model = TaggedTag
+#         fields = ['tag', 'content_type', 'object_id', 'tagged_item']
 
 
 # class OrgLoginForm(forms.ModelForm):
