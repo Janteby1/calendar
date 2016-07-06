@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	console.log("Hi there!")
     $('.parallax').parallax();
+    $('.slider').slider();
 
   $('.button-collapse').sideNav({
       edge: 'left', 
