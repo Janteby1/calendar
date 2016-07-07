@@ -61,6 +61,7 @@ class Events(models.Model):
     place = models.CharField (max_length=120)
     address = models.CharField (max_length=150)
     description = models.CharField (max_length=280)
+    organization = models.CharField (max_length=280)
 
     phone = models.CharField (max_length=20, null = True, default = None,)
     website = models.URLField(max_length=120, null = True, default = None,) 
@@ -84,7 +85,8 @@ class Events(models.Model):
             "created_at": self.created_at,
             "vote": self.vote,
             "show": self.show,
-            "creator": self.creator.id,
+            "creator": self.creator_id,
+            "creator_name": self.creator.username,
         }
 
 

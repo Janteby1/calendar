@@ -1,4 +1,5 @@
-Predetermined tags?
-Create event - add tags
+add rsvp button (add email to that)
+filter search - need to find all user entries and use all those tags
 
-my events has all events that match your tags, also a botton to manage your tags
+email notificiations when events added match your tags
+use email user django built in 
