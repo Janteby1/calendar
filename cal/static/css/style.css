@@ -37,11 +37,14 @@ form {
 	font-weight: bold;
 }
 
+#index-banner {
+	height: 60vh;
+}
+
 #banner {
 	background-color: white;
 	margin-left: -2em;
 }
-
 
 footer.page-footer {
 	margin-top: 0em;
@@ -96,6 +99,12 @@ footer.page-footer {
 	background-color: transparent;
 	font-weight: bold;
 }
+
+#blacked {
+	filter: grayscale(80%) !important;
+	-webkit-filter: grayscale(80%) !important;
+}
+
 
 
 
