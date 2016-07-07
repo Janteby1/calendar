@@ -77,7 +77,11 @@ footer.page-footer {
 	color: red;
 }
 
-
+#my_tags {
+	padding-left: 12em;
+	padding-right: 12em;
+	font-weight: bold;
+}
 
 
 @media only screen and (max-width: 600px) {
