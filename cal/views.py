@@ -197,19 +197,21 @@ class My_Events(View):
 		matching_events = TaggedTag.objects.filter(
 			content_type__pk=event_type.id, 
 			tag__id__in=[tag.id for tag in tags]
-		).prefetch_related('tagged_item')
+		).prefetch_related('tagged_item')#.order_by('-created_at')
 
 		events = [matching_event.tagged_item for matching_event in matching_events]
 		return events
 
 	def get(self, request):
 		user = request.user
-		tags = self.get_user_tags(user)
-		events = self.get_events(tags)
-
-		# makes all the events json 
-		events = [event.to_json() for event in events]
-		return JsonResponse({"success": True, 'results': events})
+		if user: 
+			tags = self.get_user_tags(user)
+			events = self.get_events(tags)
+			# makes all the events json 
+			events = [event.to_json() for event in events]
+			return JsonResponse({"success": True, 'results': events})
+		else:
+			return JsonResponse({"success": False})
 
 
 class My_Tags(View):
@@ -229,6 +231,16 @@ class My_Tags(View):
 		return JsonResponse({"success": True, "Message":"added tags", 'data': dict(request.POST)})
 
 
+class RSVP(View):
+	def post(self, request, event_id=None):
+		event = Events.objects.get(id=event_id)
+
+		if request.user.is_authenticated():
+			event.rsvp += 1
+			event.save()
+			return JsonResponse({"success": True})
+		else:
+			return JsonResponse({"success": False})
 
 
 

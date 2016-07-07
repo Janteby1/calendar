@@ -395,6 +395,38 @@ $(document).ready(function(){
     });
 
 
+//// RSVP Button ////
+    $('#answer_div').on('submit', ".rsvp_button_form", function(event){
+    event.preventDefault();
+
+    var check = confirm("Are you sure you want to go this event?");
+
+    if (check == true) {
+        var rsvp_id = ($(this).find("[name='rsvp_id']").attr("value")); // find tells it where in the this object to look for the value
+
+        $.ajax({
+            method: "POST",
+            url: ("rsvp/" + rsvp_id),
+            // data: query_string,
+        }).done(function(data, status){
+
+            if (data.success){
+                ////// if answers came back ////////
+                alert("Ok, RSVP Recorded \nPlease make sure to also sign up through ornaization websites if needed!");
+                window.scrollTo(0, 0);
+            } else {
+                var template = $('#403-template').html();
+                var renderM = Mustache.render(template);
+                $('#answer_div').html(renderM);  
+                window.scrollTo(0, 0);
+            }
+            });
+
+    } else {
+        alert("Ok, maybe try another event.");
+    }
+});
+
 
 
 

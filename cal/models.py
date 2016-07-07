@@ -70,6 +70,7 @@ class Events(models.Model):
     created_at = models.DateTimeField(default = timezone.now, editable=False)
     show = models.BooleanField(default=True)
     vote = models.IntegerField(default = 0)
+    rsvp = models.IntegerField(default = 0)
     creator = models.ForeignKey(User) # FK to the User table
 
     def to_json(self):
@@ -85,6 +86,7 @@ class Events(models.Model):
             "created_at": self.created_at,
             "vote": self.vote,
             "show": self.show,
+            "rsvp": self.rsvp,
             "creator": self.creator_id,
             "creator_name": self.creator.username,
         }
