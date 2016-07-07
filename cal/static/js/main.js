@@ -96,35 +96,6 @@ $(document).ready(function(){
     });
 
 
-///// Org Login /////
-    // $('#nav').on('click', "#org_login", function(event){
-    //     event.preventDefault();
-    //     var template = $('#org_login-template').html();
-    //     var renderM = Mustache.render(template);
-    //     $('#answer_div').html(renderM);
-    // });
-
-    // $('#answer_div').on('submit', '#org_login_form',function(event){
-    // event.preventDefault();
-
-    // var query_string = $(this).serialize() // returns all the data in your form
-
-    // $.ajax({
-    //     method: "POST",
-    //     url: "org_login",
-    //     data: query_string,
-    // }).done(function(data, status){
-
-    //       if (data.success){
-    //       ////// if they login correctly ////////
-    //         console.log("HERE")
-    //         document.location.href="/";
-    //         window.scrollTo(0, 0);
-    //         } 
-    //     });
-    // });
-
-
 ///// Logout /////
     $('#nav').on('click', "#logout", function(event){
     event.preventDefault();
@@ -395,16 +366,7 @@ $(document).ready(function(){
     });
 
 
-
-
-
-
-
-
-
 ///// View My Events /////
-// right now this just gives you all Events
-
     $('#nav').on('click', "#my", function(event){
         event.preventDefault();
 
@@ -431,5 +393,11 @@ $(document).ready(function(){
             }
         });
     });
+
+
+
+
+
+    
 
 });
