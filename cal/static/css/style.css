@@ -105,7 +105,25 @@ footer.page-footer {
 	-webkit-filter: grayscale(80%) !important;
 }
 
+.name:hover .ja-red-text {
+	color: black;
+}
 
+.name:hover .ja-black-text {
+	color: red;
+}
+
+.ja-red-text{
+	color: red;
+}
+
+.ja-black-text{
+	color: black;
+}
+
+#hover:hover {
+	font-weight: bold;
+}
 
 
 

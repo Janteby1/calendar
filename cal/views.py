@@ -204,13 +204,13 @@ class My_Events(View):
 
 	def get(self, request):
 		user = request.user
-		if user: 
+		try: 
 			tags = self.get_user_tags(user)
 			events = self.get_events(tags)
 			# makes all the events json 
 			events = [event.to_json() for event in events]
 			return JsonResponse({"success": True, 'results': events})
-		else:
+		except:
 			return JsonResponse({"success": False})
 
 
