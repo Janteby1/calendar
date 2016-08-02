@@ -178,6 +178,7 @@ class AddTags(View):
 
 class My_Events(View):
 	def get_user_tags(self, user):
+		print ("here")
 		# this gets the user type
 		user_type = ContentType.objects.get_for_model(user)
 		# returns all the rows and tags that match the users type and id 
@@ -185,8 +186,9 @@ class My_Events(View):
 			content_type__pk=user_type.id, 
 			object_id=user.id
 		)
-		
+
 		user_tags = [row.tag for row in tagged_tags]
+		print(user_tags)
 		return user_tags
 
 	def get_events(self, tags):
@@ -200,17 +202,28 @@ class My_Events(View):
 		).prefetch_related('tagged_item')#.order_by('-created_at')
 
 		events = [matching_event.tagged_item for matching_event in matching_events]
+		print (events)
 		return events
 
 	def get(self, request):
 		user = request.user
-		try: 
+		if user: 
 			tags = self.get_user_tags(user)
 			events = self.get_events(tags)
 			# makes all the events json 
-			events = [event.to_json() for event in events]
-			return JsonResponse({"success": True, 'results': events})
-		except:
+			events = [event if event is None else event.to_json() for event in events]
+			print ("events:", events)
+			
+			final_events = []
+			length = len(events)
+
+			for i in range(length):
+				if events[i] != None:
+					final_events.append(events[i])
+
+			print ("final events:", final_events) 
+			return JsonResponse({"success": True, 'results': final_events})
+		else:
 			return JsonResponse({"success": False})
 
 
